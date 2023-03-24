@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     files = {}
 
-    files["codepeer"] = download("codepeer", codepeer_agent, pendulum.now().subtract(days=1))
+    files["codepeer"] = download("codepeer-cpl", codepeer_agent, pendulum.now().subtract(days=1))
     files["gnat"] = download("gnat", codepeer_agent, pendulum.now().subtract(days=1))
     shutil.copy(files["gnat"], gnat_worker / files["gnat"].name)
 
