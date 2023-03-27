@@ -1,0 +1,32 @@
+{
+    "with" : ["gnatpro", "dockerhub"],
+    "components" : {
+        "codepeer": {
+            "cathod" : "codepeer-cpl",
+            "install" : {
+                "doinstall_pipe" : "{prefix}\ny\n",
+                "remove" : ["share/doc/*", "share/examples/"],
+                "keep" : ["share/doc/codepeer"]
+            }
+        },
+        "gnatpro": {
+            "cathod" : "gnat",
+            "install" : {
+                "doinstall_pipe" : "\n{prefix}\ny\ny\n",
+                "remove" : ["share/doc/", "share/man/", "share/examples/"]
+            }
+        }
+    },
+    "images" : {
+        "codepeer-agent" : {
+            "build_image" : "gnatpro/images/gnatpro:deps",
+            "run_image" : "dockerhub/gitlab/gitlab-runner",
+            "components" : ["codepeer", "gnatpro"]
+        },
+        "gnat-worker" : {
+            "build_image" : "gnatpro/images/gnatpro:deps",
+            "run_image" : "dockerhub/gitlab/gitlab-runner",
+            "components" : ["gnatpro"]
+        }
+    }
+}

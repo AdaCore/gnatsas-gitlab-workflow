@@ -42,19 +42,8 @@ def download(name, dest, build_date):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--manifest", type=Path)
+    ap.add_argument("component", type=str)
+    ap.add_argument("to", type=Path)
     args = ap.parse_args()
 
-    codepeer_agent = ROOT / "codepeer-agent"
-    gnat_worker = ROOT / "gnat-worker"
-
-    files = {}
-
-    files["codepeer"] = download("codepeer-cpl", codepeer_agent, pendulum.now().subtract(days=1))
-    files["gnat"] = download("gnat", codepeer_agent, pendulum.now().subtract(days=1))
-    shutil.copy(files["gnat"], gnat_worker / files["gnat"].name)
-
-    if args.manifest:
-        with open(args.manifest, "wt") as f:
-            sfiles = {str(k) : v.name for k, v in files.items()}
-            f.write(json.dumps(sfiles))
+    print(download(args.component, args.to, pendulum.now().subtract(days=1)))
