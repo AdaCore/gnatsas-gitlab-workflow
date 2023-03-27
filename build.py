@@ -1,8 +1,8 @@
-import re
 import json
 import shutil
 import collections
 import logging
+import argparse
 import epycs.subprocess as es
 from pathlib import Path
 
@@ -155,8 +155,13 @@ class BuilderFromManifest:
             self.build_image(name, local_config, out) 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    with open(ROOT / "manifest.json") as f:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--manifest", type=Path)
+    ap.add_argument("--verbose", "-v", action="store_true")
+    args = ap.parse_args()
+
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
+    with open(args.manifest) as f:
         builder = BuilderFromManifest(json.load(f))
     components = builder.download_components()
     log.debug(f"components downloaded: {[c for c in components]}")

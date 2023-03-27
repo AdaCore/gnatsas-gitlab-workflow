@@ -2,14 +2,11 @@
 
 all: codepeer-agent gnat-worker
 
-gnat_manifest.json: ALWAYS
-	python3 download_from_cathod.py --manifest=$@
+codepeer-agent: images/codepeer-agent images ALWAYS
+	docker build $< -t $@
 
-gnat-gitlab-runner: ALWAYS
-	docker build -t $@ $@ 
+gnat-worker: images/gnat-worker images ALWAYS
+	docker build $< -t $@
 
-codepeer-agent: gnat_manifest.json gnat-gitlab-runner ALWAYS
-	docker build $$(python3 manifest_to_docker_build_args.py $<) -t $@ $@
-
-gnat-worker: gnat_manifest.json gnat-gitlab-runner ALWAYS
-	docker build $$(python3 manifest_to_docker_build_args.py $<) -t $@ $@
+images: manifest.json ALWAYS
+	python3 build.py --manifest=$<
