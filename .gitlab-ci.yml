@@ -5,4 +5,24 @@ test:
     - mem:16
 
   script:
-    - codepeer --version
+    - codepeer
+        -P tictactoe/codepeer.gpr
+        --level 4
+        --text
+        --csv --out $CI_PROJECT_DIR/tictactoe/codepeer.csv
+    - python3 $CI_PROJECT_DIR/codepeer_csv_to_code_climate_json
+        --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
+        --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
+        --base_path $CI_PROJECT_DIR/tictactoe
+     # Fail pipeline if CodePeer found issues
+    - if [[ $(wc -l < $CI_PROJECT_DIR/codepeer.csv) -ge 2 ]]; then exit 1; fi
+    - zip $CI_PROJECT_DIR/tictactoe/codepeer.cpms.zip -r $CI_PROJECT_DIR/tictactoe/codepeer/obj/codepeer/codepeer.cpms
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $CI_PROJECT_DIR/tictactoe/codepeer.cpms.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/tictactoe/codepeer.cpm"'
+
+  artifacts:
+    when: always
+    paths:
+      - tictactoe/code_quality_report.json
+    reports:
+      codequality: tictactoe/code_quality_report.json
+
