@@ -4,8 +4,4 @@ project CodePeer extends "tictactoe.gpr" is
 
    for Object_Dir use "codepeer/obj";
 
-   package CodePeer is
-      for Message_Patterns use "MessagePatterns.xml";
-   end CodePeer;
-
 end CodePeer;
