@@ -1,3 +1,0 @@
-odeum
-epycs
-pendulum
