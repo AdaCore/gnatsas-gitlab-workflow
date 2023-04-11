@@ -2,6 +2,6 @@ project CodePeer extends "tictactoe.gpr" is
 
    for Target use "codepeer";
 
-   for Object_Dir use "codepeer/obj";
+   for Object_Dir use "codepeer";
 
 end CodePeer;
