@@ -9,6 +9,9 @@ test:
         -P tictactoe/codepeer.gpr
         --level 4
         --text
+    - codepeer
+        -P tictactoe/codepeer.gpr
+        --no-analysis
         --csv --out $CI_PROJECT_DIR/tictactoe/codepeer.csv
     - python3 $CI_PROJECT_DIR/codepeer_csv_to_code_climate_json
         --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
