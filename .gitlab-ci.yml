@@ -16,6 +16,8 @@ test:
         --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
         --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
         --base_path $CI_PROJECT_DIR
+    - zip -r $CI_PROJECT_DIR/codepeer_analysis.zip tictactoe/codepeer/codepeer.cpms/
+    - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/codepeer_analysis.zip 0.0.1
 
   artifacts:
     when: always
