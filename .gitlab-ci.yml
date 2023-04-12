@@ -3,6 +3,7 @@ test:
     - image:codepeer
 
   script:
+    - . ~/.aws_container_credentials
     - codepeer
         -P tictactoe/codepeer.gpr
         --level 4
