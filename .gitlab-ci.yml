@@ -1,0 +1,28 @@
+test:
+  services:
+    - image:codepeer
+    - cpu:8
+    - mem:16
+
+  script:
+    - codepeer
+        -P tictactoe/codepeer.gpr
+        --level 4
+        --text
+    - codepeer
+        -P tictactoe/codepeer.gpr
+        --no-analysis
+        --csv --out $CI_PROJECT_DIR/tictactoe/codepeer.csv
+    - python3 $CI_PROJECT_DIR/codepeer_csv_to_code_climate_json
+        --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
+        --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
+        --base_path $CI_PROJECT_DIR/tictactoe
+
+  artifacts:
+    when: always
+    paths:
+      - tictactoe/code_quality_report.json
+      - tictactoe/codepeer/codepeer.cpms
+    reports:
+      codequality: tictactoe/code_quality_report.json
+
