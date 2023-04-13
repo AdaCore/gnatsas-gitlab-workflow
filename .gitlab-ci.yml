@@ -18,7 +18,7 @@ test:
         --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
         --base_path $CI_PROJECT_DIR
     - zip -r $CI_PROJECT_DIR/codepeer_analysis.zip tictactoe/codepeer/codepeer.cpms/
-    - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/codepeer_analysis.zip 0.0.1
+    - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/codepeer_analysis.zip "$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
 
   artifacts:
     when: always
@@ -27,4 +27,3 @@ test:
       - tictactoe/codepeer/codepeer.cpms
     reports:
       codequality: tictactoe/code_quality_report.json
-
