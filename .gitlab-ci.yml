@@ -1,8 +1,6 @@
 test:
   services:
     - image:codepeer
-    - cpu:8
-    - mem:16
 
   script:
     - codepeer
