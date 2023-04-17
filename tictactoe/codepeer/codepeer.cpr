@@ -32,6 +32,24 @@
                 }
               ]
             }
+          ],
+          "tictactoe.computer_play": [
+            {
+              "msg_id": {
+                "tool_kind": [ "Inspector", "Subp_always_fails" ],
+                "key": "d41d8cd98f00b204e9800998ecf8427e",
+                "key_seq": 1
+              },
+              "data": [
+                {
+                  "date": "2023-04-17 17:12:28",
+                  "status": "False Positive",
+                  "author": "germond",
+                  "text": "Will not fail, I swear",
+                  "from_source": false
+                }
+              ]
+            }
           ]
         }
       }
