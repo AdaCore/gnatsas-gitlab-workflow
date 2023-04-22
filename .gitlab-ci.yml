@@ -1,8 +1,6 @@
 test:
   services:
     - image:codepeer
-    - cpu:8
-    - mem:16
 
   script:
     - codepeer
@@ -14,9 +12,10 @@ test:
         --no-analysis
         --csv --out $CI_PROJECT_DIR/tictactoe/codepeer.csv
     - codepeer_csv_to_code_climate_json
+        -P tictactoe/codepeer.gpr
         --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
         --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
-        --base_path $CI_PROJECT_DIR/tictactoe
+        --base_path $CI_PROJECT_DIR
 
   artifacts:
     when: always
