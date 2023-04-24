@@ -4,20 +4,24 @@ test:
 
   script:
     - . ~/.aws_container_credentials
+    - cd tictactoe
     - codepeer
-        -P tictactoe/codepeer.gpr
+        -P codepeer.gpr
         --level 4
+    - codepeer
+        -P codepeer.gpr
+        --no-analysis
         --text
     - codepeer
-        -P tictactoe/codepeer.gpr
+        -P codepeer.gpr
         --no-analysis
         --csv --out $CI_PROJECT_DIR/tictactoe/codepeer.csv
     - codepeer_csv_to_code_climate_json
-        -P tictactoe/codepeer.gpr
+        -P codepeer.gpr
         --input $CI_PROJECT_DIR/tictactoe/codepeer.csv
         --output $CI_PROJECT_DIR/tictactoe/code_quality_report.json
         --base_path $CI_PROJECT_DIR
-    - zip -r $CI_PROJECT_DIR/codepeer_analysis.zip tictactoe/codepeer/
+    - zip -r $CI_PROJECT_DIR/codepeer_analysis.zip codepeer/
     - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/codepeer_analysis.zip "$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
 
   artifacts:
