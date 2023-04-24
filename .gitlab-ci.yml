@@ -7,6 +7,9 @@ test:
     - codepeer
         -P tictactoe/codepeer.gpr
         --level 4
+    - codepeer
+        -P tictactoe/codepeer.gpr
+        --no-analysis
         --text
     - codepeer
         -P tictactoe/codepeer.gpr
