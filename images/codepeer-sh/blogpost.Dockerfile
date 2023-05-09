@@ -7,7 +7,7 @@ RUN set -xe \
 	&& cd codepeer \
 	&& ./doinstall /opt/codepeer \
 	&& cd /opt/codepeer \
-	&& mkdir -p /tmp/codepeer.keep/share/doc/codepeer && mv share/doc/codepeer /tmp/codepeer.keep/ \
+	&& mkdir -p /tmp/codepeer.keep/share/doc/codepeer && mv share/doc/codepeer /tmp/codepeer.keep/share/doc/codepeer \
 	&& rm -rf share/doc/* \
 	&& rm -rf share/examples/ \
 	&& mv /tmp/codepeer.keep/share/doc/codepeer share/doc/codepeer \
