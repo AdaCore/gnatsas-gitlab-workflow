@@ -65,7 +65,7 @@ class ReviewApp:
                     color = 0
                 print(f'\033[{color}m{l}\033[0m')
 
-        cmd.codepeer("-P", self.gpr, "--text", "--no-analysis", out_filter=color_cpm_to_text)
+        cmd.gnatsas("report", "-P", self.gpr, out_filter=color_cpm_to_text)
 
     def edit(self):
         os.system(f'gnatstudio -P {self.gpr} --eval="python:GPS.execute_action(\\\"codepeer display code review\\\")"')
