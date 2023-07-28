@@ -8,7 +8,6 @@ test:
     - gnatsas
         analyze
         -P codepeer.gpr
-        --level 4
     - gnatsas
         report
         -P codepeer.gpr
@@ -30,6 +29,6 @@ test:
     when: always
     paths:
       - tictactoe/code_quality_report.json
-      - tictactoe/codepeer/
+      - tictactoe/gnatsas/
     reports:
       codequality: tictactoe/code_quality_report.json
