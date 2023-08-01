@@ -3,7 +3,6 @@ test:
     - image:codepeer
 
   script:
-    - . ~/.aws_container_credentials
     - cd tictactoe
     - gnatsas
         analyze
