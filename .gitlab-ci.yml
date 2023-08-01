@@ -6,6 +6,7 @@ test:
     - cd tictactoe
     - gnatsas
         analyze
+        --inspector
         -P codepeer.gpr
     - gnatsas
         report
