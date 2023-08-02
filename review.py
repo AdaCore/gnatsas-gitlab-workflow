@@ -20,20 +20,28 @@ class ReviewApp:
 
         self.project = self.gl.projects.get(project_name)
         self.branch = branch
+        self.branch_as_version = self.branch.replace("/", "_")
         self.gpr = ROOT / gpr
+        self.prj_dir = self.gpr.parent
         self.cpr = self.gpr.parent / "codepeer" / self.gpr.with_suffix('.cpr').name
 
     def init(self):
         print(f"init for {self.branch}")
         all_pkg = reversed(list(self.project.packages.list(iterator=True)))
         for pkg in all_pkg:
+            if pkg.version.count("-") < 1:
+                # skip
+                continue
+
             branch, commit = pkg.version.rsplit("-", 1)
-            if branch == self.branch:
+            if branch == self.branch_as_version:
                 self.download_analysis(pkg)
                 break
+        else:
+            raise Exception(f"analysis not found for {self.branch}")
 
     def download_analysis(self, pkg):
-        obj_dir = Path(ROOT / "reviews")
+        obj_dir = Path(self.prj_dir / "reviews")
         obj_dir.mkdir(exist_ok=True)
 
         filename = "codepeer_analysis.zip"
@@ -50,7 +58,7 @@ class ReviewApp:
 
         print("extract to current project")
         zipf = zipfile.ZipFile(dest)
-        zipf.extractall(path=ROOT)
+        zipf.extractall(path=self.prj_dir)
 
         self.show()
 
@@ -64,7 +72,7 @@ class ReviewApp:
                     color = 0
                 print(f'\033[{color}m{l}\033[0m')
 
-        cmd.codepeer("-P", self.gpr, "--text", "--no-analysis", out_filter=color_cpm_to_text)
+        cmd.gnatsas("report", "-P", self.gpr, out_filter=color_cpm_to_text)
 
     def edit(self):
         os.system(f'gnatstudio -P {self.gpr} --eval="python:GPS.execute_action(\\\"codepeer display code review\\\")"')
