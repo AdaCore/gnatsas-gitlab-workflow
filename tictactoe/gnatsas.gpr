@@ -1,4 +1,4 @@
-project CodePeer extends "tictactoe.gpr" is
+project GNATSAS extends "tictactoe.gpr" is
 
    for Target use "codepeer";
 
@@ -8,4 +8,4 @@ project CodePeer extends "tictactoe.gpr" is
       for Default_Switches ("Ada") use ("--show=rank-high");
    end Reporter;
 
-end CodePeer;
+end GNATSAS;
