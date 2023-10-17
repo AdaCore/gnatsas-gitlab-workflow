@@ -6,7 +6,6 @@ from pathlib import Path
 import zipfile
 
 
-
 ROOT = Path(__file__).resolve().parent
 
 
@@ -23,7 +22,7 @@ class ReviewApp:
         self.branch_as_version = self.branch.replace("/", "_")
         self.gpr = ROOT / gpr
         self.prj_dir = self.gpr.parent
-        self.cpr = self.gpr.parent / "codepeer" / self.gpr.with_suffix('.cpr').name
+        self.cpr = self.gpr.parent / "gnatsas" / self.gpr.with_suffix(".cpr").name
 
     def init(self):
         print(f"init for {self.branch}")
@@ -44,14 +43,13 @@ class ReviewApp:
         obj_dir = Path(self.prj_dir / "reviews")
         obj_dir.mkdir(exist_ok=True)
 
-        filename = "codepeer_analysis.zip"
+        filename = "gnatsas_analysis.zip"
         dest = obj_dir / filename
 
         print("download analysis for", pkg.version, pkg.created_at, "to", dest)
         pkg_bin = self.project.generic_packages.download(
-                package_name=pkg.name,
-                package_version=pkg.version,
-                file_name=filename)
+            package_name=pkg.name, package_version=pkg.version, file_name=filename
+        )
 
         with open(dest, "wb") as f:
             f.write(pkg_bin)
@@ -70,24 +68,29 @@ class ReviewApp:
                     color = 31
                 else:
                     color = 0
-                print(f'\033[{color}m{l}\033[0m')
+                print(f"\033[{color}m{l}\033[0m")
 
         cmd.gnatsas("report", "-P", self.gpr, out_filter=color_cpm_to_text)
 
     def edit(self):
-        os.system(f'gnatstudio -P {self.gpr} --eval="python:GPS.execute_action(\\\"codepeer display code review\\\")"')
+        os.system(
+            f'gnatstudio -P {self.gpr} --eval="python:GPS.execute_action(\\"gnatsas display code review\\")"'
+        )
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["init", "show", "edit"], nargs="?", default="init")
+    ap.add_argument(
+        "command", choices=["init", "show", "edit"], nargs="?", default="init"
+    )
     args = ap.parse_args()
 
-    review = ReviewApp("https://gitlab.adacore-it.com",
-                       private_token=os.environ["GITLAB_TOKEN"],
-                       project_name="eng/codepeer/gitlab-workflow",
-                       branch=current_git_branch(),
-                       gpr="tictactoe/codepeer.gpr")
+    review = ReviewApp(
+        "https://gitlab.adacore-it.com",
+        private_token=os.environ["GITLAB_TOKEN"],
+        project_name="eng/codepeer/gitlab-workflow",
+        branch=current_git_branch(),
+        gpr="tictactoe/gnatsas.gpr",
+    )
 
     getattr(review, args.command)()
-
