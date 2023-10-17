@@ -1,8 +1,8 @@
-# CodePeer Gitlab workflow
+# GNAT SAS Gitlab workflow
 
-This repository is both an example and set of tools to use codepeer analysis with Gitlab
+This repository is both an example and set of tools to use gnatsas analysis with Gitlab
 
-* Performs CodePeer analysis of each merge request
+* Performs GNAT SAS analysis of each merge request
 * Provides CodeQuality metrics directly on Gitlab
 * Allow for manual review using GNAT Studio
 
@@ -21,9 +21,9 @@ This repository is both an example and set of tools to use codepeer analysis wit
 
 * Start GNAT Studio with the review tool
 * `python3 review.py edit`
-* This will place you in the CodePeer window
+* This will place you in the GNAT SAS window
 * Perform the reviews you want
 * Close GNAT Studio
-* The `codepeer.cpr` review file is updated
+* The `gnatsas.cpr` review file is updated
 * Commit, merge if needed, and push the file
 * The new review will be available in subsequent CI analysis

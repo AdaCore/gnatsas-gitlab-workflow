@@ -11,7 +11,7 @@
     }
   },
   "prjs": {
-    "codepeer.gpr": [
+    "gnatsas.gpr": [
       {
         "file_info": { "basename": "tictactoe.adb", "path": "." },
         "subps": {
