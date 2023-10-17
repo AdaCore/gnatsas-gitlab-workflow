@@ -32,3 +32,19 @@ test:
       - tictactoe/gnatsas/
     reports:
       codequality: tictactoe/code_quality_report.json
+stages:
+  - test
+
+autolint:
+  services:
+    - image:lint
+
+  script:
+    - autolint --check --output-code-climate-report=code_quality_report.json .
+
+  allow_failure: true
+
+  artifacts:
+    when: always
+    reports:
+      codequality: code_quality_report.json
