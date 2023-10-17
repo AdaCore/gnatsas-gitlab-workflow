@@ -8,7 +8,7 @@ RUN set -xe \
 	&& ./doinstall /opt/gnatsas \
 	&& cd /opt/gnatsas \
 	&& rm -rf share/doc/ \
-    && rm -rf /tmp/codepeer
+    && rm -rf /tmp/gnatsas
 
 # FROM gitlab/gitlab-runner AS run
 FROM ubuntu:18.04 AS run
