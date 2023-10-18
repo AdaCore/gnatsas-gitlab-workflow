@@ -1,6 +1,6 @@
 {
   "info": {
-    "cpr_version": 1,
+    "sar_version": 1,
     "review_statuses": {
       "Uncategorized": "Uncategorized",
       "Pending": "Pending",
@@ -24,28 +24,10 @@
               },
               "data": [
                 {
-                  "date": "2023-04-17 16:29:59",
-                  "status": "False Positive",
-                  "author": "germond",
-                  "text": "will not fail",
-                  "from_source": false
-                }
-              ]
-            }
-          ],
-          "tictactoe.computer_play": [
-            {
-              "msg_id": {
-                "tool_kind": [ "Inspector", "Subp_always_fails" ],
-                "key": "d41d8cd98f00b204e9800998ecf8427e",
-                "key_seq": 1
-              },
-              "data": [
-                {
-                  "date": "2023-04-17 17:12:28",
-                  "status": "False Positive",
-                  "author": "germond",
-                  "text": "Will not fail, I swear",
+                  "date": "2023-10-18 13:43:24",
+                  "status": "Bug",
+                  "author": "rivier",
+                  "text": "Some comment",
                   "from_source": false
                 }
               ]
