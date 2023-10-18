@@ -22,7 +22,6 @@ class ReviewApp:
         self.branch_as_version = self.branch.replace("/", "_")
         self.gpr = ROOT / gpr
         self.prj_dir = self.gpr.parent
-        self.cpr = self.gpr.parent / "gnatsas" / self.gpr.with_suffix(".cpr").name
 
     def init(self):
         print(f"init for {self.branch}")
