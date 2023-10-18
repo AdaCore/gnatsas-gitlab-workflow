@@ -6,6 +6,21 @@ This repository is both an example and set of tools to use gnatsas analysis with
 * Provides CodeQuality metrics directly on Gitlab
 * Allow for manual review using GNAT Studio
 
+## Setup
+
+* Install the python prerequisites
+
+```
+$ pip install -r requirements.txt
+```
+
+* Make sure that GNAT Studio and GNAT SAS are in `PATH`
+* After calling `e3-go`, do
+
+```
+$ export GITLAB_TOKEN=$(python -c "from e3.auth.gitlab import gen_gitlab_token;print(gen_gitlab_token()['token'])")
+```
+
 ## Workflow
 
 ### Create a branch
@@ -19,11 +34,10 @@ This repository is both an example and set of tools to use gnatsas analysis with
 
 ### Perform manual review using GNAT Studio
 
-* Start GNAT Studio with the review tool
-* `python3 review.py edit`
-* This will place you in the GNAT SAS window
+* Start GNAT Studio with the review tool: `python3 review.py edit`.
+* This will place you in the GNAT SAS report view.
 * Perform the reviews you want
 * Close GNAT Studio
-* The `gnatsas.cpr` review file is updated
+* The `gnatsas.sar` review file (in `tictactoe/gnatsas/gnatsas.outputs/gnatsas.sar`) is updated
 * Commit, merge if needed, and push the file
 * The new review will be available in subsequent CI analysis
