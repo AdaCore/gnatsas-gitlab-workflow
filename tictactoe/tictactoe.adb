@@ -89,6 +89,8 @@ is
    end Play;
 
    procedure Computer_Play is
+      pragma Annotate
+        (CodePeer, False_Positive, "subp always fails", "False positive, reviewed");
       Score         : Integer;
       Target_Scores : array (1 .. 2) of Integer := (2, 20);
       P             : Position                  := (1, 1);
