@@ -24,6 +24,13 @@
               },
               "data": [
                 {
+                  "date": "2023-11-17 15:07:13",
+                  "status": "Bug",
+                  "author": "germond",
+                  "text": "Yep it's a bug I can tell by the pixels",
+                  "from_source": false
+                },
+                {
                   "date": "2023-10-18 13:43:24",
                   "status": "Bug",
                   "author": "rivier",
