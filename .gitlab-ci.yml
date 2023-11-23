@@ -23,7 +23,7 @@ test:
         --out $CI_PROJECT_DIR/tictactoe/code_quality_report.json
         --root $CI_PROJECT_DIR
     - zip -r $CI_PROJECT_DIR/gnatsas_analysis.zip gnatsas/
-    - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/gnatsas_analysis.zip $(echo "$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA" | tr '/' '_')
+    - upload_generic_package eng/codepeer/gitlab-workflow $CI_PROJECT_DIR/gnatsas_analysis.zip "$CI_COMMIT_REF_SLUG"
 
   artifacts:
     when: always
