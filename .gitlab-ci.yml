@@ -13,11 +13,6 @@ test:
         -P gnatsas.gpr
     - gnatsas
         report
-        csv
-        -P gnatsas.gpr
-        --out $CI_PROJECT_DIR/tictactoe/gnatsas.csv
-    - gnatsas
-        report
         code-climate
         -P gnatsas.gpr
         --out $CI_PROJECT_DIR/tictactoe/code_quality_report.json
