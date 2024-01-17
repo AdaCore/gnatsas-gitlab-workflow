@@ -4,8 +4,4 @@ project GNATSAS extends "tictactoe.gpr" is
 
    for Object_Dir use "."; -- uses the ./gnatsas/ directory
 
-   package Reporter is
-      for Default_Switches ("Ada") use ();
-   end Reporter;
-
 end GNATSAS;
