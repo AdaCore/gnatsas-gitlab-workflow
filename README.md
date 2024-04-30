@@ -15,11 +15,14 @@ $ pip install -r requirements.txt
 ```
 
 * Make sure that GNAT Studio and GNAT SAS are in `PATH`
-* After calling `e3-go`, do
 
-```
-$ export GITLAB_TOKEN=$(python -c "from e3.auth.gitlab import gen_gitlab_token;print(gen_gitlab_token()['token'])")
-```
+## With e3
+
+* Call `e3-cli go`
+
+## Without e3
+
+* Set `GITLAB_TOKEN` to the value of a private access token
 
 ## Workflow
 

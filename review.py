@@ -84,9 +84,16 @@ if __name__ == "__main__":
     )
     args = ap.parse_args()
 
+    pat = os.environ.get("GITLAB_TOKEN")
+    if pat is None:
+        # AdaCore's e3 specific
+        from e3.auth.gitlab import gen_gitlab_token
+
+        pat = gen_gitlab_token()
+
     review = ReviewApp(
         "https://gitlab.adacore-it.com",
-        private_token=os.environ["GITLAB_TOKEN"],
+        private_token=pat,
         project_name="eng/codepeer/gitlab-workflow",
         branch=current_git_branch(),
         gpr="tictactoe/gnatsas.gpr",
