@@ -27,11 +27,7 @@ class ReviewApp:
         print(f"init for {self.branch}")
         all_pkg = reversed(list(self.project.packages.list(iterator=True)))
         for pkg in all_pkg:
-            if pkg.version.count("-") < 1:
-                # skip
-                continue
-
-            branch, commit = pkg.version.rsplit("-", 1)
+            branch = pkg.version
             if branch == self.branch_as_version:
                 self.download_analysis(pkg)
                 break
