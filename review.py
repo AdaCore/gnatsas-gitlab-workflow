@@ -6,6 +6,7 @@ from pathlib import Path
 import zipfile
 
 
+DEFAULT_GPR_FILE = "tictactoe/gnatsas.gpr"
 ROOT = Path(__file__).resolve().parent
 
 
@@ -78,6 +79,7 @@ if __name__ == "__main__":
     ap.add_argument(
         "command", choices=["init", "show", "edit"], nargs="?", default="init"
     )
+    ap.add_argument("--project", "-P", default=DEFAULT_GPR_FILE)
     args = ap.parse_args()
 
     pat = os.environ.get("GITLAB_TOKEN")
@@ -92,7 +94,7 @@ if __name__ == "__main__":
         private_token=pat,
         project_name="eng/codepeer/gitlab-workflow",
         branch=current_git_branch(),
-        gpr="tictactoe/gnatsas.gpr",
+        gpr=args.project,
     )
 
     getattr(review, args.command)()
