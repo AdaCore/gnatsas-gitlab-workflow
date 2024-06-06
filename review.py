@@ -19,7 +19,7 @@ class ReviewApp:
 
         self.project = self.gl.projects.get(project_name)
         self.branch = branch
-        self.branch_as_version = self.branch.replace("/", "_")
+        self.branch_as_version = self.branch.replace("/", "-")
         self.gpr = ROOT / gpr
         self.prj_dir = self.gpr.parent
 
