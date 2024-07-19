@@ -4,4 +4,8 @@ project GNATSAS extends "tictactoe.gpr" is
 
    for Object_Dir use "."; -- uses the ./gnatsas/ directory
 
+   package Analyzer is
+      for Switches ("analyze") use ("--mode=deep");
+   end Analyzer;
+
 end GNATSAS;
