@@ -1,0 +1,2 @@
+[diff "sam"]
+	textconv = gnatsas report text
