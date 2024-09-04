@@ -17,7 +17,9 @@ test:
         -P gnatsas.gpr
         --out $CI_PROJECT_DIR/tictactoe/code_quality_report.json
         --root $CI_PROJECT_DIR
-    - zip -r $CI_PROJECT_DIR/gnatsas_analysis.zip gnatsas/
+    - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*.sar"
+    - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*.sam"
+    - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*runs_info.json"
     # using SLUG which avoids forbidden characters within the version number
     # see e.g. https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/regex/packages.rb#L250 
     # for the generic package version regex
@@ -27,7 +29,9 @@ test:
     when: always
     paths:
       - tictactoe/code_quality_report.json
-      - tictactoe/gnatsas/
+      - tictactoe/gnatsas/*/*.sar
+      - tictactoe/gnatsas/*/*.sam
+      - tictactoe/gnatsas/*/*runs_info.json
     reports:
       codequality: tictactoe/code_quality_report.json
 stages:
