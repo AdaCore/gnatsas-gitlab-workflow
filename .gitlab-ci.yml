@@ -1,8 +1,10 @@
 test:
   services:
-    - image:codepeer
+    - image:pe-base
 
   script:
+    - e3-cathod components --component gnatsas --build-date all --install /tmp/gnatsas --platform x86_64-linux
+    - export PATH="/tmp/gnatsas/bin:${PATH}"
     - cd tictactoe
     - gnatsas
         analyze
