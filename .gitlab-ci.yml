@@ -6,7 +6,6 @@ test:
     - cd tictactoe
     - gnatsas
         analyze
-        --inspector
         -P gnatsas.gpr
     - gnatsas
         report
