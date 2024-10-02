@@ -16,6 +16,8 @@ def current_git_branch():
 
 class ReviewApp:
     def __init__(self, instance, private_token, project_name, branch, gpr):
+        assert isinstance(project_name, str)
+        assert isinstance(private_token, str)
         self.gl = gitlab.Gitlab(instance, private_token=private_token)
 
         self.project = self.gl.projects.get(project_name)
@@ -87,7 +89,7 @@ if __name__ == "__main__":
         # AdaCore's e3 specific
         from e3.auth.gitlab import gen_gitlab_token
 
-        pat = gen_gitlab_token()
+        pat = gen_gitlab_token()["token"]
 
     review = ReviewApp(
         "https://gitlab.adacore-it.com",
