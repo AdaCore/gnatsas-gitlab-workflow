@@ -2,8 +2,10 @@ test:
   services:
     - image:pe-base
 
-  script:
+  before_script:
     - e3-cathod components --component gnatsas --build-date all --install /tmp/gnatsas --platform x86_64-linux
+
+  script:
     - export PATH="/tmp/gnatsas/bin:${PATH}"
     - cd tictactoe
     - gnatsas
