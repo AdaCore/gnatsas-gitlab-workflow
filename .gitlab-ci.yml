@@ -3,8 +3,11 @@ test:
     - image:pe-base
 
   before_script:
-    - e3-cathod components --component gnatsas --build-date all --install /tmp/gnatsas --platform x86_64-linux
-    - export PATH="/tmp/gnatsas/bin:${PATH}"
+    - anod init wave
+    - cd wave
+    - anod install gnatsas
+    - eval $(anod printenv gnatsas)
+    - cd ..
 
   script:
     - cd tictactoe
