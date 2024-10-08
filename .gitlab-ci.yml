@@ -1,6 +1,13 @@
 test:
   services:
-    - image:codepeer
+    - image:pe-base
+
+  before_script:
+    - anod init wave
+    - cd wave
+    - anod install gnatsas
+    - eval $(anod printenv gnatsas)
+    - cd ..
 
   script:
     - cd tictactoe
