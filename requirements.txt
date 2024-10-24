@@ -1,0 +1,3 @@
+epycs
+python-gitlab
+git-python

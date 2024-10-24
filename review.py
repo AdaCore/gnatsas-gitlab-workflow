@@ -1,9 +1,11 @@
-import gitlab
-import argparse
 import os
-from epycs.subprocess import cmd
-from pathlib import Path
+import re
+import argparse
 import zipfile
+from pathlib import Path
+from epycs.subprocess import cmd
+import gitlab
+import git
 
 
 DEFAULT_GPR_FILE = "tictactoe/gnatsas.gpr"
@@ -76,6 +78,25 @@ class ReviewApp:
         )
 
 
+def get_git_remote_url(remote_name="origin"):
+    repo = git.Repo(ROOT)
+    return next(repo.remote(remote_name).urls)
+
+
+def get_git_remote_ssh_host_and_project():
+    url = get_git_remote_url()
+    m = re.match(r"([^@]+@)([^:]+):(.+)\.git", url)
+    assert m is not None, f"remote url {url!r} is not SSH?"
+
+    return m.group(2), m.group(3)
+
+
+def get_from_gitlab_ssh_host_to_gitlab_host(h):
+    prefix = "ssh."
+    assert h.startswith(prefix)
+    return "https://" + h[len(prefix) :]
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument(
@@ -83,6 +104,9 @@ if __name__ == "__main__":
     )
     ap.add_argument("--project", "-P", default=DEFAULT_GPR_FILE)
     args = ap.parse_args()
+
+    ssh_host, project = get_git_remote_ssh_host_and_project()
+    host = get_from_gitlab_ssh_host_to_gitlab_host(ssh_host)
 
     pat = os.environ.get("GITLAB_TOKEN")
     if pat is None:
@@ -92,9 +116,9 @@ if __name__ == "__main__":
         pat = gen_gitlab_token()["token"]
 
     review = ReviewApp(
-        "https://gitlab.adacore-it.com",
+        instance=host,
         private_token=pat,
-        project_name="eng/codepeer/gitlab-workflow",
+        project_name=project,
         branch=current_git_branch(),
         gpr=args.project,
     )
