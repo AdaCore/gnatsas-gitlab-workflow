@@ -15,13 +15,6 @@ $ pip install -r requirements.txt
 ```
 
 * Make sure that GNAT Studio and GNAT SAS are in `PATH`
-
-## With e3
-
-* Call `e3-cli go`
-
-## Without e3
-
 * Set `GITLAB_TOKEN` to the value of a private access token
 
 ## Workflow
