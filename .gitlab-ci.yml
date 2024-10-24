@@ -26,10 +26,10 @@ test:
     - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*.sar"
     - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*.sam"
     - zip $CI_PROJECT_DIR/gnatsas_analysis.zip --recurse-pattern "gnatsas/*/*runs_info.json"
-    # using SLUG which avoids forbidden characters within the version number
+    # using commit SLUG which avoids forbidden characters within the version number
     # see e.g. https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/regex/packages.rb#L250 
     # for the generic package version regex
-    - upload_generic_package $CI_PROJECT_PATH_SLUG $CI_PROJECT_DIR/gnatsas_analysis.zip "$CI_COMMIT_REF_SLUG"
+    - upload_generic_package "$CI_PROJECT_PATH" "$CI_PROJECT_DIR/gnatsas_analysis.zip" "$CI_COMMIT_REF_SLUG"
 
   artifacts:
     when: always
